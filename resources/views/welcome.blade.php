@@ -63,12 +63,22 @@
             }
         </style>
         <script>
-            function login()
-            {
-                $('.modal').on('shown.bs.modal',function(){
-                    $(this).find('iframe').attr('src','http://localhost:3000');
-                })
+            let url = 'https://81dc2f506063.ngrok.io';
+            function openLogin (el) {
+                popup = window.open(
+                    url + "/oauth/proxy?provider="
+                    + el.dataset.provider,
+                    "Login",
+                    "width=900, height=900");
+
+                setInterval(function(){
+                    popup.postMessage("Sending...", "*");
+                }, 1000);
             }
+
+            window.addEventListener("message", (event)=> {
+                console.log(event.data);
+            },false)
         </script>
     </head>
     <body>
@@ -94,8 +104,9 @@
 
                 <div class="links">
                     <a href="/enter">Войти</a>
-                    <a href="/hid-login" onclick="login">Войти через Hyundai ID</a>
-                    <a href="https://appleid.apple.com/auth/authorize?state=abvgd&response_type=code&client_id=com.simbirsoft.dev.hyundai.id.service&scope=email+name&response_mode=form_post&redirect_uri=https%3A%2F%2F450b2c77f8f1.ngrok.io%2Foauth%2Fcallback">Войти через AppleID</a>
+                    <a class="sso-login" data-provider="vk" onclick="openLogin(this)">Войти через VK</a>
+                    <a class="sso-login" data-provider="fb" onclick="openLogin(this)">Войти через Facebook</a>
+                    <a class="sso-login" data-provider="google" onclick="openLogin(this)">Войти через Google</a>
                 </div>
             </div>
         </div>
