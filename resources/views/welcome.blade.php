@@ -63,7 +63,7 @@
             }
         </style>
         <script>
-            let url = 'https://81dc2f506063.ngrok.io';
+            let url = 'https://hid-dev.simbirsoft.dev';
             function openLogin (el) {
                 popup = window.open(
                     url + "/oauth/proxy?provider="

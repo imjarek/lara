@@ -25,7 +25,7 @@ class Controller extends BaseController
             'client_id' => env('CLIENT_ID'),
             'redirect_uri' => env('APP_URL') . '/auth/callback',
             'response_type' => 'code',
-            'scope' => 'openid profile',
+            'scope' => 'openid profile email phone address',
             'state' => $state,
         ]);
 
